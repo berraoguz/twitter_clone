@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:twitter_clone/src/stores/follower_count_store.dart';
 
 import '../components/follower/follower_row_item_component.dart';
 import '../components/follower/no_follower_component.dart';
@@ -41,14 +42,21 @@ class _PageFollowerState extends State<PageFollower> {
             // 1 tab
 
             // 2 tab
-            ListView.builder(itemBuilder: (context, index) {
-              return CompFollowerRowItem(
-                name: 'isimi $index',
-              );
-            }),
+            ListView.builder(
+                itemCount: FollowerCountStore.follower.length,
+                itemBuilder: (context, index) {
+                  return CompFollowerRowItem(
+                    model: FollowerCountStore.follower[index],
+                  );
+                }),
             const CompNoFollower(),
           ],
         ),
+        bottomNavigationBar: BottomNavigationBar(
+            items: List.generate(
+                3,
+                (index) => const BottomNavigationBarItem(
+                    icon: Icon(Icons.abc), label: ''))),
       ),
     );
   }
