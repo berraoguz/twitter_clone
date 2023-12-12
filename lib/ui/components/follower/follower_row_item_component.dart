@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_clone/gen/assets.gen.dart';
+import 'package:twitter_clone/gen/fonts.gen.dart';
+import 'package:twitter_clone/src/models/follower_item_model.dart';
 
 class CompFollowerRowItem extends StatelessWidget {
-  final String name;
+  final FollowerItemModel model;
   const CompFollowerRowItem({
     super.key,
-    required this.name,
+    required this.model,
   });
 
   @override
@@ -20,39 +21,48 @@ class CompFollowerRowItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    model.userName,
                     style: const TextStyle(
                         color: Color(0xff141619),
                         fontWeight: FontWeight.w600,
+                        fontFamily: FontFamily.sFPro,
                         fontSize: 14),
                   ),
-                  const Text(
-                    'D-teams',
-                    style: TextStyle(
+                  Text(
+                    model.description,
+                    style: const TextStyle(
                         color: Color(0xff141619),
                         fontWeight: FontWeight.w400,
+                        fontFamily: FontFamily.sFPro,
                         fontSize: 19),
 
                     //
                   ),
-                  const Text(
-                    'systems',
-                    style: TextStyle(
+                  Text(
+                    '${model.followerCount.toString()} follower',
+                    style: const TextStyle(
                         color: Color(0xff687684),
                         fontWeight: FontWeight.w400,
+                        fontFamily: FontFamily.sFPro,
                         fontSize: 16),
                   ),
-                  const Text(
-                    '277 members',
-                    style: TextStyle(
+                  Text(
+                    '${model.followingCount.toString()} following',
+                    style: const TextStyle(
                         color: Color(0xff687684),
                         fontWeight: FontWeight.w400,
+                        fontFamily: FontFamily.sFPro,
                         fontSize: 14),
                   )
                 ],
               )),
           Flexible(
-              child: ClipOval(child: Assets.images.noAvatarFollower.image()))
+              child: ClipOval(
+                  child: Container(
+            color: model.avatarBg,
+            height: 100,
+            width: 100,
+          )))
         ],
       ),
     );

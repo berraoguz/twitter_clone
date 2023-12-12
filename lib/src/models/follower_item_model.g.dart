@@ -8,16 +8,20 @@ part of 'follower_item_model.dart';
 
 FollowerItemModel _$FollowerItemModelFromJson(Map<String, dynamic> json) =>
     FollowerItemModel(
-      json['name'] as String,
+      json['userName'] as String,
       json['avatar'] as String,
       json['description'] as String,
-      json['memberCount'] as int,
+      json['followerCount'] as int,
+      json['followingCount'] as int,
+      const ColorConverter().fromJson(json['avatarBg'] as int),
     );
 
 Map<String, dynamic> _$FollowerItemModelToJson(FollowerItemModel instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'userName': instance.userName,
       'avatar': instance.avatar,
       'description': instance.description,
-      'memberCount': instance.memberCount,
+      'followerCount': instance.followerCount,
+      'followingCount': instance.followingCount,
+      'avatarBg': const ColorConverter().toJson(instance.avatarBg),
     };
