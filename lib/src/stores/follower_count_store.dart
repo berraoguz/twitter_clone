@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:twitter_clone/src/models/follower_item_model.dart';
+import 'package:twitter_clone/src/models/pagination_model.dart';
 
 class FollowerCountStore {
   static List<FollowerItemModel> follower = [
@@ -13,4 +14,11 @@ class FollowerCountStore {
       'avatarBg': Colors.red.value
     })
   ];
+
+  static get pagedSample => GenericPagedResponse.fromJson({
+        'perPage': 2,
+        'currentPage': 1,
+        'data': follower.map((e) => e.toJson()),
+        'totalCount': 2
+      }, (p0) => FollowerItemModel.fromJson(p0 as Map<String, dynamic>));
 }

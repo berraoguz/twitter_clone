@@ -10,11 +10,12 @@ class FollowerItemModel {
   final int followerCount, followingCount;
   @ColorConverter()
   final Color avatarBg;
-  factory FollowerItemModel.fromJson(Map<String, dynamic> json) =>
-      _$FollowerItemModelFromJson(json);
 
   FollowerItemModel(this.userName, this.avatar, this.description,
       this.followerCount, this.followingCount, this.avatarBg);
+
+  factory FollowerItemModel.fromJson(Map<String, dynamic> json) =>
+      _$FollowerItemModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$FollowerItemModelToJson(this);
 }

@@ -6,13 +6,16 @@ import '../components/follower/follower_row_item_component.dart';
 import '../components/follower/no_follower_component.dart';
 
 class PageFollower extends StatefulWidget {
-  const PageFollower({super.key});
+  final PageFollowerArgs args;
+  const PageFollower({super.key, required this.args});
 
   @override
   State<PageFollower> createState() => _PageFollowerState();
 }
 
 class _PageFollowerState extends State<PageFollower> {
+  PageFollowerArgs get args => widget.args;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -20,14 +23,21 @@ class _PageFollowerState extends State<PageFollower> {
       initialIndex: 0,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                CupertinoIcons.left_chevron,
-                color: Colors.blue,
-              )),
-          title:
-              const Text('List', style: TextStyle(fontWeight: FontWeight.bold)),
+          leading: Visibility(
+            visible: args.showBackButton,
+            child: IconButton(
+                onPressed: () {
+                  // acik olan su andaki sayfayi ekrandan kaldirmaya yarar
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  CupertinoIcons.left_chevron,
+                  color: Colors.blue,
+                )),
+          ),
+          title: Text(args.title,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: args.titleColor)),
           bottom: const TabBar(tabs: [
             Tab(
               text: 'Subscribed to',
@@ -60,4 +70,15 @@ class _PageFollowerState extends State<PageFollower> {
       ),
     );
   }
+}
+
+class PageFollowerArgs {
+  final String title;
+  final bool showBackButton;
+  final Color titleColor;
+
+  PageFollowerArgs(
+      {this.titleColor = Colors.red,
+      required this.title,
+      required this.showBackButton});
 }
